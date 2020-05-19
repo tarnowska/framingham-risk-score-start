@@ -70,7 +70,7 @@
                 });
                      
                 var meds = smart.patient.api.fetchAll({
-                    type: /* [Insert FHIR resource type here] */,
+                    type: 'MedicationDispense',
                     query: {
                         status: "completed"
                         //code: 'http://www.nlm.nih.gov/research/umls/rxnorm|153666' // "irbesartan 150 MG Oral Tablet [Avapro]"
@@ -326,7 +326,7 @@
         var rxCuis = [];
 
         for (i = 0; i < Object.keys(medications).length; i++) {
-            var code = /* Complete this code to extract the RxNorm CUI/code from each medication */
+            var code = medications[i].medicationCodeableConcept.coding[0].code;
             rxCuis.push(code);
         }                
         return rxCuis;
@@ -417,7 +417,7 @@
             typeof ob.valueCodeableConcept.coding != 'undefined' &&
             typeof ob.valueCodeableConcept.coding[0].display != 'undefined') {
 
-            return /* Complete this code to extract the value of 'display' for  tobacco smoking status */
+            return ob.valueCodeableConcept.coding[0].display;
 
         } else {
             return undefined;
